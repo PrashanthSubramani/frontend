@@ -1,0 +1,12 @@
+[
+   {"id":1, "url":"http://unico.local", "find":"unico.local", "short_name":"RSJ", "app_key": ""},
+   {"id":1, "url":"http://asys.local", "find":"asys.local", "short_name":"AT", "app_key": "AQDOXL5O"},
+   {"id":1, "url":"http://rsj.local", "find":"rsj.local", "short_name":"RSJ", "app_key": "GXK1SZNM"},
+   {"id":1, "url":"http://dce.local", "find":"dce.local", "short_name":"DCE", "app_key": "3HJAIGRU"},
+   {"id":1, "url":"https://bits.mtec.mx", "find":"bits.mtec", "short_name":"RSJ", "app_key": "GXK1SZNM"},
+
+   {"id":1, "url":"https://prod01.appunico.com", "find":"prod01.appunico", "short_name":"AT", "app_key": ""},
+   {"id":1, "url":"https://app.asys.mx", "find":"app.asys", "short_name":"AT", "app_key": "AQDOXL5O"},
+   {"id":2, "url":"https://rsj.appunico.com", "find":"rsj.appunico", "short_name":"RSJ", "app_key": "GXK1SZNM"},
+   {"id":3, "url":"https://apps.denverce.com", "find":"apps.denverce", "short_name":"DCE", "app_key": "3HJAIGRU"}
+]
