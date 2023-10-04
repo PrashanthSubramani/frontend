@@ -5,7 +5,8 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TranslationService } from 'src/app/i18n/translation.service';
 import { ValidationService } from './validation.service';
-
+import * as hosts_json from '../../assets/json/hosts.json';
+import * as lists_json from '../../assets/json/lists.json';
 @Injectable({
   providedIn: 'root'
 })
@@ -53,12 +54,54 @@ export class AppCommonService {
 
 
   constructor(
-    private _httpClient: HttpClient,
-    private _translationService: TranslationService,
-    private _router : Router,
   ) {
 
   }
+
+
+  doGetShowEntity() {
+    const url = `${window.location.host}`.toLowerCase();
+
+    let app_key: string = '';
+    if (!environment.production) {
+        app_key = '';
+      } else {
+        const hosts_list = hosts_json;
+        for (let index = 0; index < hosts_list.length; index++) {
+          const element = hosts_list[index];
+          if (url.includes(`${element['find']}`.toLowerCase())) {
+            if (element['app_key'])
+            {
+              app_key = element['app_key'];
+              break;
+            }
+          }
+        }
+      }
+
+    return (app_key === '') ? true : false;
+  }
+
+  doGetHostEntity()
+  {
+    const url = `${window.location.host}`.toLowerCase();
+      const hosts_list = hosts_json;
+
+      let app_key: string = '';
+      for (let index = 0; index < hosts_list.length; index++) {
+        const element = hosts_list[index];
+        if(url.includes(`${element['find']}`.toLowerCase()))
+        {
+          if (element['app_key']) {
+            app_key = element['app_key'];
+            break;
+          }
+        }
+    }
+
+    return app_key;
+  }
+
 
   doGetHostApiUrl()
   {
@@ -66,22 +109,24 @@ export class AppCommonService {
 
     if(!environment.production)
     {
+      
       if (url.includes('4201')) {
         return 'http://localhost:4201';
       } else {
         return 'http://localhost:5000';
       }
-    } else {
-      // const hosts_list = hosts_json;
 
-      // for (let index = 0; index < hosts_list.length; index++) {
-      //   const element = hosts_list[index];
-      //   if(url.includes(`${element['find']}`.toLowerCase()))
-      //   {
-      //     return element['url'];
-      //     break;
-      //   }
-      // }
+    } else {
+
+      const hosts_list = hosts_json;
+      for (let index = 0; index < hosts_list.length; index++) {
+        const element = hosts_list[index];
+        if(url.includes(`${element['find']}`.toLowerCase()))
+        {
+          return element['url'];
+          break;
+        }
+      }
     }
 
     return '';

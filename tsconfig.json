@@ -2,13 +2,19 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictPropertyInitialization": false,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -17,12 +23,12 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022",
-    "useDefineForClassFields": false,
+    "module": "es2020",
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

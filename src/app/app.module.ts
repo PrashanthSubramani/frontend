@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AuthenticationService } from './account/auth/authentication.service';
 import { AuthGuard } from './core/guards/auth.guard';
@@ -18,6 +19,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CustomAdapter, CustomDateParserFormatter } from './_helpers/format-datepicker';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { AppToastrService } from './shared/app-toastr.service';
+import { ToastrModule } from 'ngx-toastr';
 function appInitializer(authService: AuthenticationService) {
   return () => {
     return new Promise((resolve: any) => {
@@ -30,6 +32,7 @@ function appInitializer(authService: AuthenticationService) {
     AppComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -37,6 +40,7 @@ function appInitializer(authService: AuthenticationService) {
     LayoutsModule,
     NgxSpinnerModule,
     TranslateModule.forRoot(),
+    ToastrModule.forRoot(),
     NgSelectModule
   ],
   providers: [

@@ -11,16 +11,14 @@ import { AppCommonService } from 'src/app/shared/app-common.service';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    empty:any = null;
-    undefined:any = undefined;
+
     apiUrl = this._appCommonService.doGetHostApiUrl();
     constructor(
         private _appCommonService: AppCommonService,
         private router: Router,
         private http: HttpClient) {
-        //this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUserSubject = new BehaviorSubject<User>(this.undefined);
 
+        this.currentUserSubject = new BehaviorSubject<User>(undefined);
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -28,13 +26,14 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    getUserByToken(): Observable<User | undefined> {
-        const auth:any = null;
+    getUserByToken(): Observable<User> {
+        const auth:any = null;//this.getAuthFromLocalStorage();
         if (!auth || !auth.accessToken) {
           return of(undefined);
         }
         return of(undefined);
     }
+
 
     login(username: string, password: string, app_key: string, entity_id: any) {
         return this.http.post<any>(`${this.apiUrl}/user_signin`, { user_name: username, password, app_key, entity_id})
@@ -53,12 +52,12 @@ export class AuthenticationService {
 
 
     logout() {
-        return this.http.post(`${this.apiUrl}/api/sys_user_logout`, { 'session': localStorage.getItem('session') })
+        return this.http.post<any>(`${this.apiUrl}/api/sys_user_logout`, { 'session': localStorage.getItem('session') })
             .pipe(map(response => {
-     
+   
                 localStorage.removeItem('currentUser');
 
-                this.currentUserSubject.next(this.empty);
+                this.currentUserSubject.next(null);
 
                 this.router.navigate(['/auth/login'], {
                   queryParams: {},
@@ -66,6 +65,14 @@ export class AuthenticationService {
 
                 return response;
             }));
+    }
+
+
+    doUnsetUserData()
+    {
+        // remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
+        this.currentUserSubject.next(null);
     }
 
 

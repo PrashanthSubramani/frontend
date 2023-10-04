@@ -1,0 +1,8 @@
+{
+    "/": {
+   "target": "http://unico.local",
+   "secure": false,
+   "logLevel": "debug",
+   "changeOrigin": true
+    }
+}

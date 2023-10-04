@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-
+import moment from 'moment';
 import { from } from 'rxjs';
 import { pluck } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+
+
 
 @Injectable()
 export class ValidationService {
@@ -68,12 +70,6 @@ export class ValidationService {
             {
                 return true
             }
-            //const strRegExp = `/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{4,100}$/)`;
-            // if (password.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{4,100}$/)) {
-            //     return true;
-            // } else {
-            //     return false;
-            // }
         }
         return false;
     }
@@ -279,40 +275,40 @@ static getMultipleObjectBySplit(value: string) {
         return valueObj[0];
     }
 
-    // static getStartOfMonth(strDate:any) {
-    //     return moment(strDate).startOf('month').format('YYYY-MM-DD');
-    // }
+    static getStartOfMonth(strDate:any) {
+        return moment(strDate).startOf('month').format('YYYY-MM-DD');
+    }
 
-    // static getEndOfMonth(strDate:any) {
-    //     return moment(strDate).endOf('month').format('YYYY-MM-DD');
-    // }
+    static getEndOfMonth(strDate:any) {
+        return moment(strDate).endOf('month').format('YYYY-MM-DD');
+    }
 
-    // static getYear(strDate:any) {
-    //     return moment(strDate).startOf('month').format('YYYY');
-    // }
+    static getYear(strDate:any) {
+        return moment(strDate).startOf('month').format('YYYY');
+    }
 
     static getSelectedMonth(year:any, month:any) {
         var dt = new Date(Number(`${year}`), Number(`${(month).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})}`), Number(`01`));
         return dt;
     }
 
-    // static getPreviousMonth(strDate: any) {
-    //     var month = moment(strDate).subtract(1, 'M');
-    //     var monthStart = moment(month).startOf('month');
+    static getPreviousMonth(strDate: any) {
+        var month = moment(strDate).subtract(1, 'M');
+        var monthStart = moment(month).startOf('month');
 
-    //     strDate = moment(monthStart).format('YYYY-MM-DD');
-    //     var dt = new Date(Number(`${strDate}`.substr(0,4)), Number(`${strDate}`.substr(5,2))-1, Number(`${strDate}`.substr(8,2)));
-    //     return dt;
-    // }
+        strDate = moment(monthStart).format('YYYY-MM-DD');
+        var dt = new Date(Number(`${strDate}`.substr(0,4)), Number(`${strDate}`.substr(5,2))-1, Number(`${strDate}`.substr(8,2)));
+        return dt;
+    }
 
-    // static getNextMonth(strDate: any) {
-    //     var month = moment(strDate).add(1, 'M');
-    //     var monthStart = moment(month).startOf('month');
+    static getNextMonth(strDate: any) {
+        var month = moment(strDate).add(1, 'M');
+        var monthStart = moment(month).startOf('month');
 
-    //     strDate = moment(monthStart).format('YYYY-MM-DD');
-    //     var dt = new Date(Number(`${strDate}`.substr(0,4)), Number(`${strDate}`.substr(5,2))-1, Number(`${strDate}`.substr(8,2)));
-    //     return dt;
-    // }
+        strDate = moment(monthStart).format('YYYY-MM-DD');
+        var dt = new Date(Number(`${strDate}`.substr(0,4)), Number(`${strDate}`.substr(5,2))-1, Number(`${strDate}`.substr(8,2)));
+        return dt;
+    }
 
     static _to2digit(n: number) {
         return ('00' + n).slice(-2);
@@ -344,95 +340,95 @@ static getMultipleObjectBySplit(value: string) {
         return dt;
     }
 
-    // static setDateToTableFormat(strDate: any) {
-    //     if(!strDate)
-    //     {
-    //         return null;
-    //     }
-    //     var date = new Date(new Date(strDate).getTime() - new Date(strDate).getTimezoneOffset()*60*1000).toISOString().substr(0,19).replace('T', ' ');
-    //     return moment(date).format('YYYY-MM-DD');
+    static setDateToTableFormat(strDate: any) {
+        if(!strDate)
+        {
+            return null;
+        }
+        var date = new Date(new Date(strDate).getTime() - new Date(strDate).getTimezoneOffset()*60*1000).toISOString().substr(0,19).replace('T', ' ');
+        return moment(date).format('YYYY-MM-DD');
 
-    //     //return moment(strDate).format('YYYY-MM-DD');
-    // }
+        //return moment(strDate).format('YYYY-MM-DD');
+    }
 
-    // static getTime() {
-    //     return moment().format('HH:mm:ss');
-    // }
+    static getTime() {
+        return moment().format('HH:mm:ss');
+    }
 
-    // static setDateToTableFormatWithTime(strDate: any) {
-    //     if(!strDate)
-    //     {
-    //         return null;
-    //     }
-    //     return moment(strDate).format('YYYY-MM-DD HH:mm:ss');
-    // }
+    static setDateToTableFormatWithTime(strDate: any) {
+        if(!strDate)
+        {
+            return null;
+        }
+        return moment(strDate).format('YYYY-MM-DD HH:mm:ss');
+    }
 
-    // static setDateToDisplayFormat(strDate: any) {
-    //     return moment(strDate).format('DD/MM/YYYY');
-    // }
+    static setDateToDisplayFormat(strDate: any) {
+        return moment(strDate).format('DD/MM/YYYY');
+    }
 
-    // static setDateToDisplayFormat_Hyphen(strDate: any) {
-    //     return moment(strDate).format('DD-MM-YYYY');
-    // }
+    static setDateToDisplayFormat_Hyphen(strDate: any) {
+        return moment(strDate).format('DD-MM-YYYY');
+    }
 
-    // static getCurrentDate() {
-    //     var date = new Date(new Date().getTime() - new Date().getTimezoneOffset()*60*1000).toISOString().substr(0,19).replace('T', ' ');
-    //     return moment(date).format('YYYY-MM-DD');
-    // }
+    static getCurrentDate() {
+        var date = new Date(new Date().getTime() - new Date().getTimezoneOffset()*60*1000).toISOString().substr(0,19).replace('T', ' ');
+        return moment(date).format('YYYY-MM-DD');
+    }
 
-    // static getCurrentMonth_Year() {
-    //     return moment().format('MMMM YYYY');
-    // }
+    static getCurrentMonth_Year() {
+        return moment().format('MMMM YYYY');
+    }
 
-    // static getCurrentYear() {
-    //     return moment().format('YYYY');
-    // }
+    static getCurrentYear() {
+        return moment().format('YYYY');
+    }
 
-    // static getDateRangeValueByLabels(date_label_id: number) {
-    //     var dt = moment();
-    //     var date_label:any = {};
-    //     switch (date_label_id) {
-    //         case 1: //Today
-    //             date_label = {from_date: dt, to_date: dt};
-    //             break;
-    //         case 2: //Last 7 Days
-    //             date_label = {from_date: moment(dt).subtract(6, 'days'), to_date: dt};
-    //             break;
-    //         case 3: //This month
-    //         case 7: //Custom Range
-    //             date_label = {from_date: moment(dt).startOf('month'), to_date: moment(dt).endOf('month')};
-    //             break;
-    //         case 4: //Last Month
-    //             var pastMonth = moment(dt).subtract(1, 'M');
-    //             date_label = {from_date: moment(pastMonth).startOf('month'), to_date: moment(pastMonth).endOf('month')};
-    //             break;
-    //         case 5: //Last 3 Months
-    //             var pastMonth = moment(dt).subtract(2, 'M');
-    //             date_label = {from_date: moment(pastMonth).startOf('month'), to_date: moment(dt).endOf('month')};
-    //             break;
-    //         case 6: //Current Year
-    //             date_label = {from_date: moment(dt).startOf('year'), to_date: moment(dt).endOf('month')};
-    //             break;
-    //         case 8: //Last 6 Months
-    //             var pastMonth = moment(dt).subtract(5, 'M');
-    //             date_label = { from_date: moment(pastMonth).startOf('month'), to_date: moment(dt).endOf('month') };
-    //             break;
-    //         default:
-    //         break;
-    //     }
+    static getDateRangeValueByLabels(date_label_id: number) {
+        var dt = moment();
+        var date_label:any = {};
+        switch (date_label_id) {
+            case 1: //Today
+                date_label = {from_date: dt, to_date: dt};
+                break;
+            case 2: //Last 7 Days
+                date_label = {from_date: moment(dt).subtract(6, 'days'), to_date: dt};
+                break;
+            case 3: //This month
+            case 7: //Custom Range
+                date_label = {from_date: moment(dt).startOf('month'), to_date: moment(dt).endOf('month')};
+                break;
+            case 4: //Last Month
+                var pastMonth = moment(dt).subtract(1, 'M');
+                date_label = {from_date: moment(pastMonth).startOf('month'), to_date: moment(pastMonth).endOf('month')};
+                break;
+            case 5: //Last 3 Months
+                var pastMonth = moment(dt).subtract(2, 'M');
+                date_label = {from_date: moment(pastMonth).startOf('month'), to_date: moment(dt).endOf('month')};
+                break;
+            case 6: //Current Year
+                date_label = {from_date: moment(dt).startOf('year'), to_date: moment(dt).endOf('month')};
+                break;
+            case 8: //Last 6 Months
+                var pastMonth = moment(dt).subtract(5, 'M');
+                date_label = { from_date: moment(pastMonth).startOf('month'), to_date: moment(dt).endOf('month') };
+                break;
+            default:
+            break;
+        }
 
-    //     const dt_label = {from_date: this.setDateToTableFormat(date_label['from_date']), to_date: this.setDateToTableFormat(date_label['to_date'])};
-    //     return dt_label;
-    // }
+        const dt_label = {from_date: this.setDateToTableFormat(date_label['from_date']), to_date: this.setDateToTableFormat(date_label['to_date'])};
+        return dt_label;
+    }
 
-    static doFilterTable(data = [], find_cols: string = "", search: string = ""){
+    static doFilterTable(data:any = [], find_cols: string = "", search: string = ""){
         search = search.trim(); // Remove whitespace
         search = search.toLowerCase();
 
         let cols = find_cols.split("|");
 
         var records = data.filter(
-            option => {
+            (option:any) => {
                 //let result_value = "";
                 let search_flag = false;
                 cols.forEach(element => {

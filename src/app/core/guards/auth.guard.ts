@@ -8,7 +8,6 @@ import { AuthenticationService } from 'src/app/account/auth/authentication.servi
 export class AuthGuard implements CanActivate {
     constructor(
         private authService: AuthenticationService,
-        private router: Router,
     ) { }
 
     canActivate() {
@@ -19,24 +18,15 @@ export class AuthGuard implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
-
         this.authService.logout()
-            .subscribe(
-                (res:any) => {
-                    if (res['error'] === 1) {
-
-                    } else {
- 
-                    }
-                },
-                error => {
-   
-                });
-                
-        this.router.navigate(['/auth/login'], {
-            queryParams: {},
-            });
-            
+        .subscribe(
+            data => {
+              console.log('Logout successful', data);
+            },
+            error => {
+              console.log('Logout error', error);
+            }
+          );
         return false;        
 
     }

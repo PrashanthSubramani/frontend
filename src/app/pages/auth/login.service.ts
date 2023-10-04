@@ -1,10 +1,6 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable} from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-
-import { map } from 'rxjs/operators';
-
-import { HttpClient } from '@angular/common/http';
 import { TranslationService } from 'src/app/i18n/translation.service';
 import { AppCommonService } from '../../shared/app-common.service';
 
@@ -21,12 +17,10 @@ export class LoginService {
   public menu_generate_data:any;
   public update_menu_generate_data:any = [];
 
-  public module_based_generate_data = [];
+  public module_based_generate_data:any = [];
   module_icons: any = {};
 
   constructor(
-    private _httpClient: HttpClient,
-    private _zone: NgZone,
     private _translationService: TranslationService,
     private _appCommon: AppCommonService,
   ) {
@@ -201,7 +195,6 @@ export class LoginService {
         useTranslate = false;
       }
 
-      //const module_icon = this.module_icons[element.module_icon - 1].name;
       var module_icon = '';//this.module_icons[element.module_icon - 1].name;
       if (element['group_module'] && element['group_module'] !== null){
         module_icon = this.module_icons[element.g_module_icon - 1].name;
@@ -209,12 +202,7 @@ export class LoginService {
         module_icon = this.module_icons[element.module_icon - 1].name;
       }
 
-      // let pages;
-      // pages = data.pages.filter(data => {
-      //   return data.module_id === element['module_id'];
-      // });
 
-      // Prepare the new nav item
       const item = {
         icon: module_icon,
         id: element['module_id'],

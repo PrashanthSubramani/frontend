@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { AccountRoutingModule } from './account-routing.module';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgbModalModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -11,7 +14,12 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     CommonModule,
-    AccountRoutingModule
+    ReactiveFormsModule,
+    FormsModule,
+    AccountRoutingModule,
+    NgbModalModule,
+    NgbTooltipModule,
+    TranslateModule,
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

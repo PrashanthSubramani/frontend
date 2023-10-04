@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 
 @Injectable({providedIn: 'root'})
 export class AppToastrService {
+  
   constructor(
     private _translationService: TranslationService,
     private toastr: ToastrService,
