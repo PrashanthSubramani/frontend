@@ -12,21 +12,14 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     empty:any = null;
+    undefined:any = undefined;
     apiUrl = this._appCommonService.doGetHostApiUrl();
     constructor(
         private _appCommonService: AppCommonService,
         private router: Router,
         private http: HttpClient) {
         //this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUserSubject = new BehaviorSubject<User>({
-            id: undefined,
-            username: undefined,
-            password: undefined,
-            firstName: undefined,
-            lastName: undefined,
-            token: undefined,
-            email: undefined,
-          });
+        this.currentUserSubject = new BehaviorSubject<User>(this.undefined);
 
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -60,14 +53,13 @@ export class AuthenticationService {
 
 
     logout() {
-        //return this.http.post(`${this.apiUrl}/api/sys_user_logout`, {'session': localStorage.getItem('session')} )
         return this.http.post(`${this.apiUrl}/api/sys_user_logout`, { 'session': localStorage.getItem('session') })
             .pipe(map(response => {
-                // remove user from local storage to log user out
+     
                 localStorage.removeItem('currentUser');
+
                 this.currentUserSubject.next(this.empty);
 
-//                localStorage.removeItem(this.authLocalStorageToken);
                 this.router.navigate(['/auth/login'], {
                   queryParams: {},
                 });

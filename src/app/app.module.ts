@@ -17,6 +17,7 @@ import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstr
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CustomAdapter, CustomDateParserFormatter } from './_helpers/format-datepicker';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { AppToastrService } from './shared/app-toastr.service';
 function appInitializer(authService: AuthenticationService) {
   return () => {
     return new Promise((resolve: any) => {
@@ -54,8 +55,8 @@ function appInitializer(authService: AuthenticationService) {
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    //{ provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
     AppCommonService,
+    AppToastrService
   ],
   bootstrap: [AppComponent]
 })

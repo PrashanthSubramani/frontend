@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 
 // Auth Services
 import { AuthenticationService } from 'src/app/account/auth/authentication.service';
@@ -7,7 +7,8 @@ import { AuthenticationService } from 'src/app/account/auth/authentication.servi
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private router: Router,
     ) { }
 
     canActivate() {
@@ -18,18 +19,24 @@ export class AuthGuard implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
+
         this.authService.logout()
             .subscribe(
                 (res:any) => {
                     if (res['error'] === 1) {
 
                     } else {
-    
+ 
                     }
                 },
                 error => {
    
                 });
+                
+        this.router.navigate(['/auth/login'], {
+            queryParams: {},
+            });
+            
         return false;        
 
     }
