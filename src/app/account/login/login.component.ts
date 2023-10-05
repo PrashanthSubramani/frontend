@@ -93,6 +93,8 @@ export class LoginComponent {
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    this.onSubmit();
     
   }
 
@@ -171,7 +173,7 @@ export class LoginComponent {
     if (load_default_page === 'null' || load_default_page === null || load_default_page === '') {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
   
-        this.router.navigate(['/auth/attendance-login']);
+        this.router.navigate(['/auth/attendance_login']);
       });
     } else {
       this.router.navigate([load_default_page]);

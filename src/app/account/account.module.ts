@@ -6,11 +6,13 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModalModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { AttendanceLoginComponent } from './attendance-login/attendance-login.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    AttendanceLoginComponent
   ],
   imports: [
     CommonModule,

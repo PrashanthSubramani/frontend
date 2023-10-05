@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import "~bootstrap/dist/css/bootstrap.css";
+
+body{
+    background-color: #f7f7f7 !important;
+}
+
+.margin-top-70{
+    margin-top: 70px;
+}*/
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import '../node_modules/angular-archwizard/styles/archwizard.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+:host ::ng-deep .email-fixed-header {
+  min-height: calc(100% - 207px)!important;
+  margin-top: 0!important;
+  overflow-y: hidden !important;
+}
+::ng-deep ngb-modal-backdrop {
+  z-index: 1050 !important;
+}
+:host ::ng-deep .ngb-dp-header {
+  background-color: var(--light) !important;
+}
+
