@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  // set the currenr year
+  year: number = new Date().getFullYear();
+  entities : string = localStorage.getItem('entities');
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 }

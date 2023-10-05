@@ -13,8 +13,8 @@ body{
 @import '~quill/dist/quill.snow.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
-@import '../node_modules/angular-archwizard/styles/archwizard.css';
-@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/angular-archwizard/styles/archwizard.css';
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 :host ::ng-deep .email-fixed-header {
   min-height: calc(100% - 207px)!important;

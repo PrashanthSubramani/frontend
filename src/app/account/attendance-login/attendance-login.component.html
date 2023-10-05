@@ -1,61 +1,82 @@
-<div class="app-content content">
-    <div class="content-overlay"></div>
-    <div class="content-wrapper">
-        <div class="content-header row">
-        </div>
-        <div class="content-body">
-            <section class="row flexbox-container">
-                <div class="col-12 d-flex align-items-center justify-content-center">
-                    <div class="col-lg-6 col-md-8 col-10 box-shadow-2">
-                        <div class="card border-grey border-lighten-3 m-3">
-                            <div class="card-header border-0">
-                                <div class="card-title text-center">
-                                    <img src="../../../assets/images/logo-dark.png" alt="branding logo">
-                                </div>
+<section class="vh-100" style="background-color: #e9e9e9;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block mt-5" >
+                <img src="../../../assets/images/login-image.jpg" 
+                  alt="login form" class="img-fluid mt-5" style="border-radius: 1rem 0 0 1rem;" />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+  
+    
+  
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                        <img src="../../../assets/images/logo-dark.png" alt="branding logo">
+                    </div>
+  
+                    <h6 class="fw-normal mb-3 pb-3 text-muted" style="letter-spacing: 1px;">Sign in to continue to Application.</h6>
+  
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                        <div class="mb-3">
+                            <label class="form-label text-muted" for="device_number">{{ 'LOGINAC.DEVICE_NUMBER' | translate}}</label>
+                            <input type="text" class="form-control" id="device_number" formControlName="device_number"
+                            [ngClass]="{ 'is-invalid': submitted && f['device_number'].errors }" (keypress)="numberOnly($event)"
+                            placeholder="Enter Device Number">
+                            <div *ngIf="submitted && f['device_number'].errors" class="invalid-feedback">
+                                <div *ngIf="f['device_number'].errors['required']">{{ 'COMMON.FIELD_IS_REQUIRED' | translate }}</div>
                             </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="tryLogin()">
-                                        <div class="row form-group">
-                                            <div class="col-md-12 mb-3">
-                                                <label for="form-label"> Username </label>
-                                                <input type="text" formControlName="email" class="form-control"
-                                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="user-name"
-                                                placeholder="Your Username" required>
-                                                <div class="form-control-position">
-                                                    <i class="la la-user"></i>
-                                                </div>
-                                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.email.errors.required">Username is required</div>
-                                                </div>
-                                            </div>
+                          </div>
 
-                                            <div class="col-md-12 mb-3">
-                                                <label for="form-label">Password</label>
-                                                <input type="password" placeholder="Enter Password"
-                                                formControlName="password" class="form-control"
-                                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                                                <div class="form-control-position">
-                                                    <i class="la la-key"></i>
-                                                </div>
-                                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.password.errors.required">Password is required</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="mb-3">
+                          <label class="form-label text-muted" for="phone">{{ 'LOGINAC.PHONE_NUMBER' | translate}}</label>
+                          <input type="text" class="form-control" id="phone" formControlName="phone"
+                          [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }" (keypress)="numberOnly($event)"
+                          placeholder="Enter Phone Number">
+                          <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                              <div *ngIf="f['phone'].errors['required']">{{ 'COMMON.FIELD_IS_REQUIRED' | translate }}</div>
+                              <div *ngIf="f['phone'].errors['required']">Phone Number must be a valid.
+                              </div>
+                          </div>
+                        </div>
 
-                                        <button type="submit" class="btn btn-outline-info btn-block w-100 ">
-                                            <i class="fa fa-refresh fa-spin" *ngIf="submitted"></i>
-                                            <i class="feather ft-unlock" *ngIf="!submitted"></i> Login
-                                        </button>
-                                    </form>
+                        <div class="mb-3">
+                            <label class="form-label text-muted" for="password-input">{{ 'LOGINAC.ACCESS_PIN' | translate}}</label>
+                            <div class="position-relative auth-pass-inputgroup mb-3">
+                                <input [type]="fieldTextType ? 'text' : 'password'" class="form-control pe-5" placeholder="Enter Access Pin" id="access-pin" formControlName="pin" (keypress)="numberOnly($event)"
+                                [ngClass]="{ 'is-invalid': submitted && f['pin'].errors }"> 
+                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="mdi align-middle" [ngClass]="{'mdi-eye-off-outline': !fieldTextType, 'mdi-eye-outline': fieldTextType
+                                }" (click)="toggleFieldTextType()"></i></button>
+                                <div *ngIf="submitted && f['pin'].errors" class="invalid-feedback">
+                                  <span *ngIf="f['pin'].errors['required']">{{ 'COMMON.FIELD_IS_REQUIRED' | translate }}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </section>
 
+                        <div class="mb-3">
+                            <label class="form-label text-muted" for="force">{{ 'LOGINAC.FORCE' | translate}}</label>
+                            <select class="form-select mb-3"  formControlName="force">
+                                <option value="Y">Yes</option>
+                                <option value="N" selected >No</option>
+                            </select>
+
+                            <div *ngIf="submitted && f['force'].errors" class="invalid-feedback">
+                                <div *ngIf="f['force'].errors['required']">{{ 'COMMON.FIELD_IS_REQUIRED' | translate }}</div>
+                            </div>
+                          </div>
+
+                        <div class="mt-4">
+                            <button class="btn btn-primary w-100" type="submit">{{ 'LOGINAC.LOGIN' | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </section>
