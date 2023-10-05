@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthenticationService } from 'src/app/account/auth/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +9,27 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus:boolean =true; 
-  constructor(){}
+  constructor(private authService: AuthenticationService){}
   ngOnInit():void{}
 
   SideNavToggle() {
     this.menuStatus = !this.menuStatus;
     this.sideNavToggled.emit(this.menuStatus);
   }
+
+  logout() {
+    // this.auth.logout();
+    // document.location.reload();
+    this.authService.logout()
+      .subscribe(
+        res => {
+          if (res['error'] === 1) {
+          } else {
+
+          }
+        },
+        error => {
+        });
+  }    
+
 }

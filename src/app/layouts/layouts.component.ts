@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 export class LayoutsComponent {
   title="HeaderSideNav";
   sideNavStatus:boolean = true;
+  isDropdownOpen: boolean = false;
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 }

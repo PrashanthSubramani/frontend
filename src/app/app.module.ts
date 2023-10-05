@@ -14,7 +14,7 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgbDateAdapter, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { CustomAdapter, CustomDateParserFormatter } from './_helpers/format-datepicker';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -41,7 +41,8 @@ function appInitializer(authService: AuthenticationService) {
     NgxSpinnerModule,
     TranslateModule.forRoot(),
     ToastrModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    NgbModule
   ],
   providers: [
     {
