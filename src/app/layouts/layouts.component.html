@@ -1,1 +1,11 @@
-<p>Layout works</p>
+<div class="container-fluid g-0">
+    <app-header (sideNavToggled)="sideNavStatus = $event;"></app-header>
+
+    <main>
+        <app-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open' : sideNavStatus}"></app-sidebar>
+
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <p class="fs-1 fw-bold fst-italic">Main content to show here</p>
+        </div>
+    </main>
+</div>

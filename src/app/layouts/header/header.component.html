@@ -1,1 +1,25 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand navbar-dark bg-dark px-2">
+    <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggle()">
+        <i class="fa fa-solid fa-bars"></i>
+    </div>
+
+    <div class="navbar-brand px-4" href="#">Header and sideNav</div>
+
+    <div class="navbar-collapse">
+
+    </div>
+
+    <form class="d-flex me-5">
+        <input class="form-control me-2" type="search" placeholder="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+    </form>
+
+    <div class="profile-logo dropstart">
+        <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdowm">
+            Prashanth
+        </button>
+        <ul class="dropdown-menu dropdow-menu-dark">
+            <li><a href="#" class="dropdown-item">Sign Out</a></li>
+        </ul>
+    </div>
+</nav>

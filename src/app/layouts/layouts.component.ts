@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./layouts.component.css']
 })
 export class LayoutsComponent {
-
+  title="HeaderSideNav";
+  sideNavStatus:boolean = true;
 }
