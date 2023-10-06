@@ -1,0 +1,8 @@
+<ol class="breadcrumb m-0">
+    <li class="breadcrumb-item" *ngIf="this.breadCrumbsInfo && this.breadCrumbsInfo['bc_group_module_name']">{{this.breadCrumbsInfo['bc_group_module_name']}}</li>
+    <li class="breadcrumb-item" *ngIf="this.breadCrumbsInfo && this.breadCrumbsInfo['bc_module_name']">{{this.breadCrumbsInfo['bc_module_name']}}</li>
+    <li class="breadcrumb-item" *ngIf="this.breadCrumbsInfo && this.breadCrumbsInfo['bc_catalog_name']">{{this.breadCrumbsInfo['bc_catalog_name']}}</li>
+    <li class="breadcrumb-item text-danger" [ngClass]="{'active': true}" style="cursor: pointer;"
+        *ngIf="this.breadCrumbsInfo && this.breadCrumbsInfo['bc_page_link']"
+        (click)="doRefreshPage(this.breadCrumbsInfo['bc_page_link'])">{{this.breadCrumbsInfo['bc_page_name']}}</li>
+</ol>

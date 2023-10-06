@@ -9,7 +9,10 @@ const routes: Routes =[
   },
   {
     path: 'sys', loadChildren: () => import('./sys/sys.module').then(m => m.SysModule)
-  }
+  },
+  {
+    path: 'ac', loadChildren: () => import('./ac/ac.module').then(m => m.AcModule)
+  },
 ];
 
 @NgModule({

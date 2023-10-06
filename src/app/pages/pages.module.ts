@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
-import { LandingPagesComponent } from './sys/landing-pages/landing-pages.component';
-import { Routes } from '@angular/router';
+import { AcComponent } from './ac/ac.component';
 
 
 
 @NgModule({
   declarations: [
-
+    AcComponent
   ],
   imports: [
     CommonModule,

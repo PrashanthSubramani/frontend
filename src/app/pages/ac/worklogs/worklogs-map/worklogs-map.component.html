@@ -1,0 +1,18 @@
+
+<div class="modal-header bg-light p-2">
+    <div class="container p-0">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <h4 class="modal-title lbl_uppercase">Map View</h4>
+
+        <div class="d-flex align-items-center flex-wrap text-nowrap">
+            <a class="btn btn-link btn-link btn-icon" (click)="doCloseModal()" ngbTooltip="{{'COMMON.CANCEL' | translate}}">
+                <i data-feather="x" appFeatherIcon class="icon-sm"></i>
+              </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div #map style="width:100%;height:400px"></div>
+  </div>

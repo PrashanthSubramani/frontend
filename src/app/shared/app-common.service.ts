@@ -131,4 +131,219 @@ export class AppCommonService {
 
     return '';
   }
+
+  doGenerateFilterParamDefinition_ToShowScreen(curDefValues = {}) {
+    //STR => String
+    //CTS => Convert To String
+    //CTB => Convert To Boolean
+
+    let resultValue: any;
+
+    let def = curDefValues['definition'];
+    let data = curDefValues['data'];
+    let list = (curDefValues['list']) ? curDefValues['list'] : undefined;
+
+    let type = (def['type']) ? def['type'] : 'STR';
+
+    let field_name = (def['field_name']) ? def['field_name'] : def['key_name'];
+   
+    switch (type) {
+      case 'STR':
+        resultValue = (data[field_name]) ? `${data[field_name]}`.trim() : null;
+        break;
+      case 'CTS':
+        resultValue = data[field_name].toString();
+        break;
+      case 'CTB':
+        var compare_value = (def['compare_value']) ? def['compare_value'] : 'Y';
+        resultValue = (data[field_name] === compare_value) ? true : false;
+        break;
+      case 'DATE':
+        resultValue = ValidationService.setDateToDisplayFormat_Simple(data[field_name]);
+        break;
+
+        case 'DOC_DT_RANGE':
+          if(data['doc_date_labels']!=null){
+            if(data['doc_date_labels']['store_value'] === 7)
+            {
+              resultValue = `${data['doc_from_date']}`.split('-').join('/') + " - " + `${data['doc_to_date']}`.split('-').join('/');
+
+            }else{
+              resultValue = data['doc_date_labels']['display_value'];
+
+            }
+          }
+
+        break;
+      case 'DT_RANGE':
+        if(data['date_labels']!=null){
+          if (data['date_labels']['store_value'] === 7)
+          {
+            resultValue = `${data['from_date']}`.split('-').join('/') + " - " + `${data['to_date']}`.split('-').join('/');
+          } else {
+            resultValue = data['date_labels']['display_value'];
+          }
+        }
+
+        break;
+
+
+      case 'DT_RANGE_NEW':
+        if (data['date_labels']['store_value'] === 7) {
+          //resultValue = `${data['from_date']}`.split('-').join('/') + " - " + `${data['to_date']}`.split('-').join('/');
+        } else {
+          //resultValue = data['date_labels']['display_value'];
+        }
+        break;
+      case 'LIST':
+        if(data[field_name])
+        {
+          var disp_col_name = (def['disp_col_name']) ? def['disp_col_name'] : 'display_value';
+          resultValue = data[field_name][disp_col_name];
+        } else {
+          resultValue = null;
+        }
+        break;
+      case 'LOV':
+        if (data[field_name]) {
+          resultValue = data[field_name]['display_value'];
+        } else {
+          resultValue = null;
+        }
+        break;
+      default:
+        break;
+    }
+
+    return resultValue;
+  }
+
+  
+  doGenerateResultValue(curDefValues = {})
+  {
+    //STR => String
+    //CTS => Convert To String
+    //CTB => Convert To Boolean
+
+    let resultValue: any;
+
+    let def = curDefValues['definition'];
+    let data = curDefValues['data'];
+    let list = (curDefValues['list']) ? curDefValues['list'] : undefined;
+
+    let type = (def['type']) ?  def['type'] : 'STR';
+
+    let field_name = (def['field_name']) ? def['field_name'] : def['key_name']
+    switch (type) {
+      case 'STR':
+        resultValue = data[field_name];
+        break;
+      case 'CTS':
+          resultValue = data[field_name].toString();
+        break;
+      case 'CTB':
+        var compare_value = (def['compare_value']) ? def['compare_value'] : 'Y';
+        resultValue = (data[field_name] === compare_value) ? true : false;
+        break;
+      case 'CTU':
+        var compare_value = (def['compare_value']) ? def['compare_value'] : 'S';
+        resultValue = (data[field_name] === compare_value) ? true : false;
+        break;
+      case 'DATE':
+        resultValue = ValidationService.setDateToDisplayFormat_Simple(data[field_name]);
+        if (resultValue === '0-0-0') resultValue = null;
+        break;
+      case 'LIST':
+        resultValue = ValidationService.getAutoCompleteRecordObject(list, data[field_name]);
+        break;
+      case 'LIST_EXT': //List Extract
+        resultValue = ValidationService.getAutoCompleteRecordObject(list, data[field_name]);
+        break;
+      case 'LOV':
+        var lov_obj = {};
+
+        var obj_bind_to = def['obj_bind_to'];
+        obj_bind_to.forEach(element => {
+          lov_obj[element['bind_name']] = data[element['key_name']];
+        });
+
+        resultValue = lov_obj;
+        break;
+      case 'IMG':
+        resultValue = data[field_name] || 'assets/images/users/blank.png';
+        break;
+      default:
+        break;
+    }
+
+    return resultValue;
+  }
+
+  doGenerateResultValue_OnSaveData(curDefValues = {}) {
+    //STR => String
+    //CTS => Convert To String
+    //CTB => Convert To Boolean
+    //CFB => Convert From Boolean
+
+    let resultValue: any;
+
+    let def = curDefValues['definition'];
+    let data = curDefValues['data'];
+    let list = (curDefValues['list']) ? curDefValues['list'] : undefined;
+
+    let type = (def['type']) ? def['type'] : 'STR';
+
+    let field_name = (def['field_name']) ? def['field_name'] : def['key_name'];
+
+    switch (type) {
+      case 'CFB':
+        // Y-N
+        var true_value = (def['true_value']) ? def['true_value'] : 'Y';
+        var false_value = (def['false_value']) ? def['false_value'] : 'N';
+        resultValue = (data[field_name]) ? true_value : false_value;
+        break;
+      case 'CFU':
+        // Y-N
+        var true_value = (def['true_value']) ? def['true_value'] : 'S';
+        var false_value = (def['false_value']) ? def['false_value'] : 'A';
+        resultValue = (data[field_name]) ? true_value : false_value;
+        break;
+      case 'DATE':
+        resultValue = ValidationService.setDateToTableFormat_Simple(data[field_name]);
+        break;
+      case 'LIST_EXT': //List Extract
+        var ref_obj = data[def['ref_obj']];
+        if (ref_obj)
+        {
+          resultValue = ref_obj[def['extract_key_name']];
+        } else {
+          resultValue = null;
+        }
+        break;
+      default:
+        break;
+    }
+
+    return resultValue;
+  }
+
+  doGetRandomInt(length: number) {
+    var randomChars = '0123456789';
+    var result = '';
+    for (var i = 0; i < length; i++) {
+      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
+  }
+
+
+  doTableNameFormat(tbl_name: string) {
+    // if(environment.tbl_name_upper_case)
+    // {
+   
+    //   return tbl_name.toUpperCase();
+    // }
+ 
+    return tbl_name.toLowerCase();
+  }
 }

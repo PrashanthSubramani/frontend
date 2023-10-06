@@ -21,6 +21,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { AppToastrService } from './shared/app-toastr.service';
 import { ToastrModule } from 'ngx-toastr';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { BreadCrumbsService } from './shared/bread-crumbs-service';
 function appInitializer(authService: AuthenticationService) {
   return () => {
     return new Promise((resolve: any) => {
@@ -63,7 +64,8 @@ function appInitializer(authService: AuthenticationService) {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AppCommonService,
-    AppToastrService
+    AppToastrService,
+    BreadCrumbsService
   ],
   bootstrap: [AppComponent]
 })
