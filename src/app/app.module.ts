@@ -29,6 +29,9 @@ import { MenuSettingsConfig } from './layouts/settings/menu-settings.config';
 import { SettingsModule } from './layouts/settings/settings.module';
 import { ThemeSettingsConfig } from './layouts/settings/theme-settings.config';
 import { RouterModule } from '@angular/router';
+import { NavbarService } from './_services/navbar.service';
+import { AuthService } from './_services/auth.service';
+import { AngularFireModule } from '@angular/fire/compat';
 function appInitializer(authService: AuthenticationService) {
   return () => {
     return new Promise((resolve: any) => {
@@ -61,6 +64,7 @@ function appInitializer(authService: AuthenticationService) {
     FormsModule,
     // Settings modules
     SettingsModule.forRoot(ThemeSettingsConfig, MenuSettingsConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     PerfectScrollbarModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
@@ -85,7 +89,9 @@ function appInitializer(authService: AuthenticationService) {
     AppCommonService,
     AppToastrService,
     BreadCrumbsService,
-    AuthGuard
+    AuthGuard,
+    NavbarService,
+    AuthService
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule]
