@@ -22,6 +22,13 @@ import { AppToastrService } from './shared/app-toastr.service';
 import { ToastrModule } from 'ngx-toastr';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { BreadCrumbsService } from './shared/bread-crumbs-service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { environment } from 'src/environments/environment';
+import { MenuSettingsConfig } from './layouts/settings/menu-settings.config';
+import { SettingsModule } from './layouts/settings/settings.module';
+import { ThemeSettingsConfig } from './layouts/settings/theme-settings.config';
+import { RouterModule } from '@angular/router';
 function appInitializer(authService: AuthenticationService) {
   return () => {
     return new Promise((resolve: any) => {
@@ -45,7 +52,19 @@ function appInitializer(authService: AuthenticationService) {
     ToastrModule.forRoot(),
     NgSelectModule,
     NgbModule,
-    SimplebarAngularModule
+    SimplebarAngularModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    FormsModule,
+    // Settings modules
+    SettingsModule.forRoot(ThemeSettingsConfig, MenuSettingsConfig),
+    PerfectScrollbarModule,
+    ToastrModule.forRoot(),
+    NgxSpinnerModule,
+
   ],
   providers: [
     {
@@ -65,8 +84,10 @@ function appInitializer(authService: AuthenticationService) {
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AppCommonService,
     AppToastrService,
-    BreadCrumbsService
+    BreadCrumbsService,
+    AuthGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule { }

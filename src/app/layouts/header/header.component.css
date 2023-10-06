@@ -1,21 +1,35 @@
-nav{
-    height: 100%;   
+.dropdown-menu-right {
+    right: 0;
+    left: auto !important;
+    top: auto !important;
 }
 
-.header-profile-user{
-    width: 50px;
-    height: 50px;
+.header-navbar .navbar-container ul.nav li a.dropdown-user-link .user-name {
+    margin-left: 0rem !important;
 }
 
-.side-nav-button {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    cursor:pointer;
+.border_bottom {
+    border-bottom: none !important;
 }
 
-.side-nav-button:hover{
-    background-color: rgb(225, 225, 225,0.2) ;
-    border-radius: 30%;
+:host ::ng-deep .dropdown-item:active {
+    color: #fff !important;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .ft-toggle-right {
+    display: none !important;
+  }
+
+  .ft-toggle-left {
+        display: none !important;
+  }
+
+  .collapse:not(.show) {
+    display: unset !important;
+  }
+}
+
+.header-navbar .navbar-header .navbar-brand .brand-text {
+  padding-left: 11px !important;
 }
