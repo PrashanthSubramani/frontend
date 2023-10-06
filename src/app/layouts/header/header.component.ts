@@ -9,8 +9,11 @@ import { AuthenticationService } from 'src/app/account/auth/authentication.servi
 export class HeaderComponent implements OnInit {
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus:boolean =true; 
+  currentUser = this.authService.currentAcUserValue;
   constructor(private authService: AuthenticationService){}
-  ngOnInit():void{}
+  ngOnInit():void{
+    console.log(this.currentUser);
+  }
 
   SideNavToggle() {
     this.menuStatus = !this.menuStatus;
@@ -18,8 +21,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    // this.auth.logout();
-    // document.location.reload();
     this.authService.logout()
       .subscribe(
         res => {

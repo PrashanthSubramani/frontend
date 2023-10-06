@@ -1,10 +1,73 @@
 <div class="side-nav-content">
-    <ul class="nav-list" [ngClass]="{'nav-list-open':sideNavStatus}">
-        <li class="nav-list-item" *ngFor="let item of list;">
+    <ul class="nav-list" [ngClass]="{'nav-list-open':sideNavStatus}" style="flex-wrap:wrap;">
+        <!-- <li class="nav-list-item" *ngFor="let item of list;">
             <i class="{{item.icon}}"></i>
             <span>
                 <a href="#">{{item.name}}</a>
             </span>
-        </li>
+        </li> -->
+
+        <ng-container *ngFor="let item of menuItems">
+          <li class="menu-title small muted" *ngIf="item.isTitle"><span data-key="t-menu">{{ item.label | translate }}</span></li>
+
+          <li class="nav-item mt-2" *ngIf="!item.isTitle && !item.isLayout">
+            <a *ngIf="hasItems(item)" href="javascript:void(0);" class="is-parent nav-link menu-link"
+              [ngClass]="{'has-arrow': !item.badge, 'has-dropdown': item.badge}" data-bs-toggle="collapse"
+              aria-expanded="false" (click)="toggleItem($event)">
+              <i [attr.data-feather]="item.icon" class="icon nav-icon feather-icon" appFeatherIcon></i>
+              <span class=""> {{ item.label | translate }}</span>
+              <span class="badge badge-pill {{item.badge.variant}}" *ngIf="item.badge">{{item.badge.text | translate}}</span>
+          </a>
+
+            <a [routerLink]="item.link" *ngIf="!hasItems(item)" class="side-nav-link-ref nav-link menu-link" routerLinkActive="active">
+              <i class="bx {{ item.icon }} icon nav-icon" *ngIf="item.icon" class=""></i>
+              <span class=""> {{ item.label | translate }}</span>
+              <span class="badge {{item.badge.variant}} float-end" *ngIf="item.badge">{{item.badge.text |
+                translate}}</span>
+            </a>
+            <div class="collapse menu-dropdown" id="sidebarDashboards" *ngIf="hasItems(item)">
+              <ul *ngIf="hasItems(item)" class="nav nav-sm flex-column" aria-expanded="false" style="list-style-type: disc; padding-left: 20px;">
+                  <li *ngFor="let subitem of item.subItems" class="nav-item">
+                  <a [routerLink]="subitem.link" *ngIf="!hasItems(subitem)" class="nav-link"
+                      [attr.data-parent]="subitem.parentId" routerLinkActive="active" (click)="updateActive($event)">
+                      <i class="bx {{ subitem.icon }} icon nav-icon" *ngIf="subitem.icon" class=""></i>{{ subitem.label | translate}}
+                  </a>
+                  <a *ngIf="hasItems(subitem)" class="nav-link" href="javascript:void(0);"
+                      [attr.data-parent]="subitem.parentId" data-bs-toggle="collapse" aria-expanded="false" (click)="toggleSubItem($event)">
+                      <i class="bx {{ subitem.icon }} icon nav-icon" *ngIf="subitem.icon" class=""></i>{{ subitem.label | translate}}
+                  </a>
+                  <div class="collapse menu-dropdown" id="sidebarDashboards" *ngIf="hasItems(item)">
+                    <ul *ngIf="hasItems(item)" class="nav nav-sm flex-column" aria-expanded="false">
+                        <li *ngFor="let subSubitem of item.subItems" class="nav-item">
+                            <a [routerLink]="subitem.link" *ngIf="!hasItems(subitem)" class="nav-link"
+                            [attr.data-parent]="subitem.parentId" routerLinkActive="active" (click)="updateActive($event)">
+                            <i class="bx {{ subitem.icon }} icon nav-icon" *ngIf="subitem.icon"></i>{{ subitem.label | translate}}
+                        </a>
+                        
+                          <a [attr.data-parent]="subSubitem.parentId" [routerLink]="subSubitem.link" data-bs-toggle="collapse" aria-expanded="false" routerLinkActive="active" *ngIf="subSubitem.childItem"
+                          class="nav-link" (click)="updateActive($event)">
+                              {{ subSubitem.label | translate }}
+                          </a>
+
+                          <div class="collapse menu-dropdown" *ngIf="subSubitem.childItem">
+                              <ul class="nav nav-sm flex-column" aria-expanded="false">
+                                  <li *ngFor="let subChilditem of subSubitem.childItem" class="nav-item">
+                                  <a [attr.data-parent]="subSubitem.parentId" [routerLink]="subChilditem.link" routerLinkActive="active"
+                                  class="nav-link" (click)="updateActive($event)">
+                                      {{ subChilditem.label | translate }}
+                                  </a>
+                                  </li>
+                              </ul>
+                          </div>
+
+                          </li>
+                      </ul>
+                  </div>
+                  </li>
+              </ul>
+            </div>
+          </li>
+        </ng-container>
     </ul>
+
 </div>

@@ -13,8 +13,6 @@ import { locale as common_spanish } from 'src/app/navigation/i18n/es';
 
 // Login Auth
 import { environment } from '../../../environments/environment';
-//import { AuthenticationService } from '../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 import { first } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AppToastrService } from 'src/app/shared/app-toastr.service';
@@ -22,7 +20,6 @@ import { AuthenticationService } from '../auth/authentication.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from 'src/app/pages/auth/login.service';
 import { AppCommonService } from 'src/app/shared/app-common.service';
-// import { WorklogService } from 'src/app/pages/ac/worklogs/worklog.service';
 
 @Component({
   selector: 'app-attendance-login',
@@ -65,18 +62,9 @@ export class AttendanceLoginComponent {
     private translationService: TranslateService,
     private _translationService: TranslationService,
     ) {
-      // // redirect to home if already logged in
-      // if (this.authService.currentUserValue) {
-      //   this.router.navigate(['/']);
-      // }
 
       this.translationService.use('es');
-
-      // register translations
       this._translationService.loadTranslations(english, spanish, common_english, common_spanish);
-
-      // remove user from local storage to log user out
-      // this.authService.doUnsetUserData();
     }
 
   ngOnInit(): void {
@@ -122,11 +110,10 @@ export class AttendanceLoginComponent {
        .subscribe(
          data => {
            this._spinner.hide();
-           console.log(data);
           if (data['error'] === 1) {
             this._toastr.errorMessage(data['message']);
           } else {
-            this.router.navigate(['ac/worklogs']);
+            this.router.navigate(['sys/lpage']);
           }
          },
          e => {

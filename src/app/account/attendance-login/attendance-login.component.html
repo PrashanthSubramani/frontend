@@ -2,11 +2,11 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
-          <div class="card" style="border-radius: 1rem;">
+          <div class="card" style="border-radius: 1rem;background-color: rgb(1, 9, 32) !important;">
             <div class="row g-0">
               <div class="col-md-6 col-lg-5 d-none d-md-block mt-5" >
                 <img src="../../../assets/images/login-image.jpg" 
-                  alt="login form" class="img-fluid mt-5" style="border-radius: 1rem 0 0 1rem;" />
+                  alt="login form" class="img-fluid mt-5 mx-4" style="border-radius: 1rem 0 0 1rem;" />
               </div>
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
@@ -14,16 +14,16 @@
     
   
                     <div class="d-flex align-items-center mb-3 pb-1">
-                        <img src="../../../assets/images/logo-dark.png" alt="branding logo">
+                        <img src="../../../assets/images/logo-light.png" alt="branding logo">
                     </div>
   
-                    <h6 class="fw-normal mb-3 pb-3 text-muted" style="letter-spacing: 1px;">Sign in to continue to Application.</h6>
+                    <h6 class="fw-normal mb-3 pb-3 text-light" style="letter-spacing: 1px;">Sign in to continue to Application.</h6>
   
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
                         <div class="mb-3">
  
-                            <label class="form-label text-muted" for="device_number">{{ 'LOGINAC.DEVICE_NUMBER' | translate}}</label>
+                            <label class="form-label text-light" for="device_number">{{ 'LOGINAC.DEVICE_NUMBER' | translate}}</label>
                             <input type="text" class="form-control" id="device_number" formControlName="device_number"
                             [ngClass]="{ 'is-invalid': submitted && f['device_number'].errors }" (keypress)="numberOnly($event)"
                             placeholder="Enter Device Number">
@@ -33,7 +33,7 @@
                           </div>
 
                         <div class="mb-3">
-                          <label class="form-label text-muted" for="phone">{{ 'LOGINAC.PHONE_NUMBER' | translate}}</label>
+                          <label class="form-label text-light" for="phone">{{ 'LOGINAC.PHONE_NUMBER' | translate}}</label>
                           <input type="text" class="form-control" id="phone" formControlName="phone"
                           [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }" (keypress)="numberOnly($event)"
                           placeholder="Enter Phone Number">
@@ -45,11 +45,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label text-muted" for="password-input">{{ 'LOGINAC.ACCESS_PIN' | translate}}</label>
+                            <label class="form-label text-light" for="password-input">{{ 'LOGINAC.ACCESS_PIN' | translate}}</label>
                             <div class="position-relative auth-pass-inputgroup mb-3">
                                 <input [type]="fieldTextType ? 'text' : 'password'" class="form-control pe-5" placeholder="Enter Access Pin" id="access-pin" formControlName="pin" (keypress)="numberOnly($event)"
                                 [ngClass]="{ 'is-invalid': submitted && f['pin'].errors }"> 
-                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="mdi align-middle" [ngClass]="{'mdi-eye-off-outline': !fieldTextType, 'mdi-eye-outline': fieldTextType
+                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-light" type="button" id="password-addon"><i class="mdi align-middle" [ngClass]="{'mdi-eye-off-outline': !fieldTextType, 'mdi-eye-outline': fieldTextType
                                 }" (click)="toggleFieldTextType()"></i></button>
                                 <div *ngIf="submitted && f['pin'].errors" class="invalid-feedback">
                                   <span *ngIf="f['pin'].errors['required']">{{ 'COMMON.FIELD_IS_REQUIRED' | translate }}</span>
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label text-muted" for="force">{{ 'LOGINAC.FORCE' | translate}}</label>
+                            <label class="form-label text-light" for="force">{{ 'LOGINAC.FORCE' | translate}}</label>
                             <select class="form-select mb-3"  formControlName="force">
                                 <option value="Y">Yes</option>
                                 <option value="N" selected >No</option>
@@ -73,6 +73,7 @@
                             <button class="btn btn-primary w-100" type="submit">{{ 'LOGINAC.LOGIN' | translate}}</button>
                         </div>
                     </form>
+                    
                 </div>
               </div>
             </div>

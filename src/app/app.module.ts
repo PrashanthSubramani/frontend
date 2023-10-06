@@ -20,6 +20,7 @@ import { CustomAdapter, CustomDateParserFormatter } from './_helpers/format-date
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { AppToastrService } from './shared/app-toastr.service';
 import { ToastrModule } from 'ngx-toastr';
+import { SimplebarAngularModule } from 'simplebar-angular';
 function appInitializer(authService: AuthenticationService) {
   return () => {
     return new Promise((resolve: any) => {
@@ -42,7 +43,8 @@ function appInitializer(authService: AuthenticationService) {
     TranslateModule.forRoot(),
     ToastrModule.forRoot(),
     NgSelectModule,
-    NgbModule
+    NgbModule,
+    SimplebarAngularModule
   ],
   providers: [
     {
